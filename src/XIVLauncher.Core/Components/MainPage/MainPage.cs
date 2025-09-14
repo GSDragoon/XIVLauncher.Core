@@ -375,7 +375,13 @@ public class MainPage : Page
                 using var process = await StartGameAndAddon(loginResult, isSteam, action == LoginAction.GameNoDalamud, action == LoginAction.GameNoPlugins, action == LoginAction.GameNoThirdparty).ConfigureAwait(false);
 
                 if (process is null)
-                    throw new InvalidOperationException("Could not obtain Process Handle");
+                {
+                    // Requires patched wine for this logic to work
+                    // So just exist instead as that wine version isn't needed for the game
+                    // I also don't want the launcher to stay open after the game runs.
+                    Environment.Exit(0);
+                    // throw new InvalidOperationException("Could not obtain Process Handle");
+                }
 
                 if (process.ExitCode != 0 && (App.Settings.TreatNonZeroExitCodeAsFailure ?? false))
                 {
@@ -839,6 +845,7 @@ public class MainPage : Page
 
         // Hide the launcher if not Steam Deck or if using as a compatibility tool (XLM)
         // Show the Steam Deck prompt if on steam deck and not using as a compatibility tool
+        /*
         if (!Program.IsSteamDeckHardware || CoreEnvironmentSettings.IsSteamCompatTool)
         {
             Hide();
@@ -847,6 +854,7 @@ public class MainPage : Page
         {
             App.State = LauncherApp.LauncherState.SteamDeckPrompt;
         }
+        */
 
         if (launchedProcess == null)
         {
@@ -885,7 +893,7 @@ public class MainPage : Page
 
         Log.Debug("Waiting for game to exit");
 
-        await Task.Run(() => launchedProcess!.WaitForExit()).ConfigureAwait(false);
+        // await Task.Run(() => launchedProcess!.WaitForExit()).ConfigureAwait(false);
 
         Log.Verbose("Game has exited");
 
