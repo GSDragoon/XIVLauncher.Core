@@ -55,7 +55,10 @@ public class UnixDalamudRunner : IDalamudRunner
             DalamudInjectorArgs.AssetDirectory(startInfo.AssetDirectory),
             DalamudInjectorArgs.ClientLanguage((int)startInfo.Language),
             DalamudInjectorArgs.DelayInitialize(startInfo.DelayInitializeMs),
-            DalamudInjectorArgs.TsPackB64(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(startInfo.TroubleshootingPackData))),
+            // DalamudInjectorArgs.TsPackB64(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(startInfo.TroubleshootingPackData))),
+            // Don't enable Dalmud Crash Handler
+            // https://github.com/goatcorp/Dalamud/blob/68656f2b40d7f112bbe32b3db9e957d82efd613b/Dalamud.Boot/veh.cpp#L146
+            "--unhandled-exception=none"
         };
 
         if (loadMethod == DalamudLoadMethod.ACLonly)
