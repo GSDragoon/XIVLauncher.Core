@@ -28,7 +28,7 @@ public class CompatibilityTools
     private string WineBinPath => Settings.StartupType == WineStartupType.Managed ?
                                     Path.Combine(wineDirectory.FullName, Settings.WineRelease.Name, "bin") :
                                     Settings.CustomBinPath;
-    private string Wine64Path => Path.Combine(WineBinPath, "wine64");
+    private string Wine64Path => Path.Combine(WineBinPath, "wine");
     private string WineServerPath => Path.Combine(WineBinPath, "wineserver");
 
     private readonly DxvkVersion dxvkVersion;
@@ -156,7 +156,8 @@ public class CompatibilityTools
         var wineEnviromentVariables = new Dictionary<string, string>
         {
             { "WINEPREFIX", Settings.Prefix.FullName },
-            { "WINEDLLOVERRIDES", $"{WINEDLLOVERRIDES}{(ogl ? "b" : "n,b")}" }
+            { "WINEDLLOVERRIDES", $"{WINEDLLOVERRIDES}{(ogl ? "b" : "n,b")}" },
+            { "WINEARCH", "win64"}
         };
 
         if (!string.IsNullOrEmpty(Settings.DebugVars))

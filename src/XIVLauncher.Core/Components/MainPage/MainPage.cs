@@ -675,8 +675,8 @@ public class MainPage : Page
                 else if (!Directory.Exists(App.Settings.WineBinaryPath))
                     throw new InvalidOperationException("Custom wine binary path is invalid: no such directory.\n" +
                                                         "Check path carefully for typos: " + App.Settings.WineBinaryPath);
-                else if (!File.Exists(Path.Combine(App.Settings.WineBinaryPath, "wine64")))
-                    throw new InvalidOperationException("Custom wine binary path is invalid: no wine64 found at that location.\n" +
+                else if (!File.Exists(Path.Combine(App.Settings.WineBinaryPath, "wine")))
+                    throw new InvalidOperationException("Custom wine binary path is invalid: no wine found at that location.\n" +
                                                         "Check path carefully for typos: " + App.Settings.WineBinaryPath);
                 
                 Log.Information("Using Custom Wine: " + App.Settings.WineBinaryPath);
@@ -693,7 +693,7 @@ public class MainPage : Page
             var _ = Task.Run(async () =>
             {
                 var tempPath = App.Storage.GetFolder("temp");
-                var winver = (App.Settings.SetWin7 ?? true) ? "win7" : "win10";
+                var winver = (App.Settings.SetWin7 ?? true) ? "win7" : "win11";
 
                 await Program.CompatibilityTools.EnsureTool(tempPath).ConfigureAwait(false);
                 Program.CompatibilityTools.RunInPrefix($"winecfg /v {winver}");
