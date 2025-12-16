@@ -356,7 +356,7 @@ public class MainPage : Page
             {
                 using var process = await StartGameAndAddon(loginResult, isSteam, action == LoginAction.GameNoDalamud, action == LoginAction.GameNoPlugins, action == LoginAction.GameNoThirdparty).ConfigureAwait(false);
 
-                if (process is null)
+                if (process is null || !process.HasExited)
                 {
                     // Requires patched wine for this logic to work
                     // So just exist instead as that wine version isn't needed for the game
