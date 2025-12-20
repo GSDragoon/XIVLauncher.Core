@@ -11,8 +11,6 @@ public interface ILauncherConfig
 {
     public bool? CompletedFts { get; set; }
 
-    public bool? DoVersionCheck { get; set; }
-
     public float? FontPxSize { get; set; }
 
     public string? CurrentAccountId { get; set; }
@@ -88,6 +86,8 @@ public interface ILauncherConfig
     public bool? FixError127 { get; set; }
 
     public bool? SetWin7 { get; set; }
+    
+    public bool? DontUseSystemTz {get; set;}
 
     #endregion
 
@@ -98,6 +98,8 @@ public interface ILauncherConfig
     public DalamudLoadMethod? DalamudLoadMethod { get; set; }
     public bool? DalamudManualInjectionEnabled { get; set; }
     public DirectoryInfo? DalamudManualInjectPath { get; set; }
+    public string? DalamudBetaKind { get; set; }
+    public string? DalamudBetaKey { get; set; }
 
     public int DalamudLoadDelay { get; set; }
 
