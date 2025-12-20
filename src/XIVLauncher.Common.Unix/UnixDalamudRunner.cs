@@ -38,8 +38,13 @@ public class UnixDalamudRunner : IDalamudRunner
             () => { startInfo.AssetDirectory = compatibility.UnixToWinePath(startInfo.AssetDirectory); }
         );
 
+        // I'm setting these myself to override the runtimes the launcher downloads
+        // They are proxyed through their services instead of directly from MS and are not kept up to date with latest releases
+        // DOTNET_ROOT_X64 is needed, using only DOTNET_ROOT doesn't work, despite what the documentation says
         environment.Add("DALAMUD_RUNTIME", dotnetRuntimePath);
+        environment.Add("DOTNET_ROOT_X64", dotnetRuntimePath);
         environment.Add("DOTNET_ROOT", dotnetRuntimePath);
+        Log.Information("dotnetRuntimePath: " + dotnetRuntimePath);
 
         var launchArguments = new List<string>
         {

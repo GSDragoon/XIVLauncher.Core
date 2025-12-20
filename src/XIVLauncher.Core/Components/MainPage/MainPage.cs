@@ -546,7 +546,10 @@ public class MainPage : Page
                 break;
 
             case PlatformID.Unix:
-                dalamudRunner = new UnixDalamudRunner(Program.CompatibilityTools, Program.DotnetRuntime);
+                // I'm setting these myself to override the runtimes the launcher downloads
+                // They are proxyed through their services instead of directly from MS and are not kept up to date with latest releases
+                DirectoryInfo customRuntimeDir = Program.storage.GetFolder("runtimeLocal");
+                dalamudRunner = new UnixDalamudRunner(Program.CompatibilityTools, customRuntimeDir);
                 dalamudCompatCheck = new UnixDalamudCompatibilityCheck();
                 break;
 
