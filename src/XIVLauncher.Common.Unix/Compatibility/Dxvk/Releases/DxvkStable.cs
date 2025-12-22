@@ -2,7 +2,7 @@ namespace XIVLauncher.Common.Unix.Compatibility.Dxvk.Releases;
 
 public sealed class DxvkStableRelease : IDxvkRelease
 {
-    public string Name { get; } = "dxvk-2.7.1";
-    public string DownloadUrl { get; } = "https://github.com/doitsujin/dxvk/releases/download/v2.7.1/dxvk-2.7.1.tar.gz";
-    public string Checksum { get; } = "49f617de31e502fc158df3845845a3c19fa912681dbbf0e2309079184fd9957905350669dcaf1e3ba661f2f1739b5f6b9e1151e73b485021491f194eae9c2d13";
+    public string Name { get; } = "dxvk-gplasync-v2.6.1-1";
+    public string DownloadUrl { get; } = "https://raw.githubusercontent.com/goatcorp/xlcore-distrib/refs/heads/main/dxvk-gplasync-v2.6.1-1.tar.gz";
+    public string Checksum { get; } = "4196972aa26ffd7da94542fef065bdb2a4a0926498fe4834ef75f43dd2a8c393db8b0edffa21a2906f664a99679cfea4c371c5a9577eb025410b76d63df8a872";
 }
