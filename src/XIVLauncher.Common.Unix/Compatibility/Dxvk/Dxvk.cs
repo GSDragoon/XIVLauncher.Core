@@ -14,6 +14,9 @@ namespace XIVLauncher.Common.Unix.Compatibility.Dxvk;
 public enum DxvkVersion
 {
 
+    [SettingsDescription("Official", "DXVK 2.7.1. Requires Mesa 25.1, Nvidia 575.51 or later drivers.")]
+    Official,
+
     [SettingsDescription("Stable", "DXVK 2.6.1 with GPLAsync patches. Requires Mesa 24.0 or Nvidia 535 drivers. Ideal for graphics cards.")]
     Stable,
 
@@ -49,6 +52,7 @@ public static class Dxvk
         }
         IDxvkRelease release = version switch
         {
+            DxvkVersion.Official => new DxvkOfficialRelease(),
             DxvkVersion.Stable => new DxvkStableRelease(),
             DxvkVersion.Beta => new DxvkBetaRelease(),
             DxvkVersion.Legacy => new DxvkLegacyRelease(),
