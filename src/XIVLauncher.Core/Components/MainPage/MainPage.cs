@@ -716,6 +716,10 @@ public class MainPage : Page
             {
                 var tempPath = App.Storage.GetFolder("temp");
                 await Program.CompatibilityTools.EnsureTool(Program.HttpClient, tempPath).ConfigureAwait(false);
+                // Set version to Windows 11 as defaults are current using 10 which is technically not supported
+                // The game may check the version in the future and this may help avoid issues
+                // https://gitlab.winehq.org/wine/wine/-/wikis/Commands/winecfg#windows-version
+                Program.CompatibilityTools.RunInPrefix("winecfg /v win11");
             }).ContinueWith(t =>
             {
                 isFailed = t.IsFaulted || t.IsCanceled;
